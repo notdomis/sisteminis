@@ -38,7 +38,7 @@ namespace hf
     }
 
     template <typename T>
-    void partition(const T &students, T &students_good, T &students_bad)
+    void memoryPartition(const T &students, T &students_good, T &students_bad)
     {
         for (const auto &student : students)
         {
@@ -49,6 +49,24 @@ namespace hf
             else
             {
                 students_bad.push_back(student);
+            }
+        }
+    }
+
+    template <typename T>
+    void deletionPartition(T &students_good, T &students_bad)
+    {
+        typename T::iterator it = students_good.begin();
+        while (it != students_good.end())
+        {
+            if (!(*it).isGood())
+            {
+                students_bad.push_back(*it);
+                students_good.erase(it++);
+            }
+            else
+            {
+                ++it;
             }
         }
     }
@@ -74,6 +92,7 @@ namespace hf
     }
 
     extern void generateSampleFile(int, const std::string &);
+    extern void optimizedPartition(std::vector<Student> &, std::vector<Student> &, std::vector<Student> &);
 }
 
 #endif
