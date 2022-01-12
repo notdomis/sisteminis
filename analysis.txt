@@ -1,0 +1,23 @@
+Pradinio failo dydis | failo kurimas | duomenu nuskaitymas is failo | studentu rusiavimas i grupes | duomenu isvedimas i faila
+
+1000     |    1.4ms |     6.4ms |    0.4ms |     1.4ms
+10000    |    7.4ms |    26.0ms |    4.1ms |    12.9ms
+100000   |   70.1ms |   181.8ms |   32.4ms |   130.8ms
+1000000  |  711.5ms |  1936.1ms |  397.0ms |  1284.1ms
+10000000 | 7188.6ms | 19388.6ms | 3392.5ms | 12712.8ms
+
+Konteinerio tipas | duomenu nuskaitymas is failo | studentu rusiavimas i grupes (viskas daroma su 10000000 elementu)
+vector | 20039.2ms | 3432.7ms
+list   | 16737.3ms | 2474.3ms
+deque  | 16325.2ms | 1766.2ms
+
+Konteinerio tipas | Strategija | studentu rusiavimas i grupes (viskas daroma su 100000 elementu)
+vector | 1 |    33.4ms
+vector | 2 | 85725.5ms
+list   | 1 |    24.9ms
+list   | 2 |    14.2ms
+deque  | 1 |    17.1ms
+deque  | 2 | 57625.2ms
+
+Optimizing (viskas daroma su 100000 elementu)
+Pasirinktas metodas Partition - 8ms isrusiavimui 32ms nukopijavimui i rezultatu masyvus
