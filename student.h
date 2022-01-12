@@ -7,8 +7,6 @@
 #include <vector>
 #include <numeric>
 #include <algorithm>
-#include <stdlib.h>
-#include <time.h>
 
 class Student
 {
@@ -26,9 +24,10 @@ public:
     Student &operator=(const Student &);                                  // 2/3: Copy Assignment
     ~Student();                                                           // 3/3: Dtor
 
-    std::istream& populate(std::istream&, const bool = false, const bool = false);       // input
-    void printToConsole(const size_t) const;                                             // output
+    std::istream& populate(std::istream&, const bool = false);            // input
+    std::ostream& write(std::ostream&, const size_t) const;               // output
 
-    bool operator < (const Student&) const;                                              // sorting
+    bool operator < (const Student&) const;                               // sorting 
+    bool isGood() const;                                                  
 };
 #endif
