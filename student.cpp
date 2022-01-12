@@ -22,31 +22,18 @@ Student::~Student()
     // we do not allocate any memory ourselves
 }
 
-std::istream &Student::populate(std::istream &is, const bool use_median, const bool random)
+std::istream &Student::populate(std::istream &is, const bool use_median)
 {
     is >> this->_first_name >> this->_last_name;
     int grades = 5 + 1;
+    int grade;
 
-    if (!random)
+    while (--grades)
     {
-        int grade;
-        while (--grades)
-        {
-            is >> grade;
-            this->_homework.push_back(grade);
-        }
-        is >> this->_exam;
+        is >> grade;
+        this->_homework.push_back(grade);
     }
-    else
-    {
-        std::srand(std::time(0));
-
-        while (--grades)
-        {
-            this->_homework.push_back(rand() % 10 + 1);
-        }
-        this->_exam = rand() % 10 + 1;
-    }
+    is >> this->_exam;
 
     if (!this->_homework.empty()) // avoid division by zero
     {
@@ -67,19 +54,25 @@ std::istream &Student::populate(std::istream &is, const bool use_median, const b
     return is;
 }
 
-void Student::printToConsole(const size_t field_length) const
+std::ostream& Student::write(std::ostream& os, const size_t field_length) const
 {
-    std::cout << std::fixed
-              << std::left
-              << std::setw(field_length)
-              << this->_first_name
-              << std::setw(field_length)
-              << this->_last_name
-              << std::right
-              << std::setw(field_length) << this->_final << '\n';
+    os << std::fixed
+        << std::left
+        << std::setw(field_length)
+        << this->_first_name
+        << std::setw(field_length)
+        << this->_last_name
+        << std::right
+        << std::setw(field_length) << this->_final << '\n';
+    return os;
 }
 
 bool Student::operator<(const Student &other) const
 {
     return this->_first_name < other._first_name;
+}
+
+bool Student::isGood() const
+{
+    return this->_final >= 5;
 }
